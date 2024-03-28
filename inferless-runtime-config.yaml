@@ -3,5 +3,10 @@ build:
   system_packages:
     - "libssl-dev"
   python_packages:
-    - "transformers==4.39.1"
+    - "einops==0.7.0"
     - "accelerate==0.28.0"
+    - "transformers==4.39.1"
+    - "torchvision==0.17.2"
+    - "pillow==10.2.0"
+    - "numpy==1.25.0"
+    - "scikit-image==0.22.0"
