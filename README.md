@@ -1,5 +1,5 @@
-# Animagine-xl-3.0
-This is a animagine-xl-3.0 model template you can use to import your model on Inferless Platform. Animagine XL 3.0, the advanced open-source anime text-to-image model. Building on the foundation of Animagine XL 2.0 and powered by Stable Diffusion XL, this latest version offers superior image generation. It features enhancements in hand anatomy, efficient tag ordering, and a deeper understanding of anime concepts.
+# RMBG v1.4
+RMBG v1.4 is the state-of-the-art background removal model, designed to effectively separate foreground from background in a range of categories and image types. This model has been trained on a carefully selected dataset, which includes: general stock images, e-commerce, gaming, and advertising content, making it suitable for commercial use cases powering enterprise content creation at scale. The accuracy, efficiency, and versatility currently rival leading source-available models. It is ideal where content safety, legally licensed datasets, and bias mitigation are paramount.
 
 ---
 ## Prerequisites
@@ -44,9 +44,9 @@ curl --location '<your_inference_url>' \
               "inputs": [
                 {
                   "data": [
-                    "1girl, arima kana, oshi no ko, solo, upper body, v, smile, looking at viewer, outdoors, night"
+                    "https://www.godrejinterio.com/imagestore/B2C/56101543SD00165/56101543SD00165_A2_803x602.jpg"
                   ],
-                  "name": "prompt",
+                  "name": "image_url",
                   "shape": [
                     1
                   ],
