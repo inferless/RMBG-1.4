@@ -1,18 +1,22 @@
-from transformers import AutoTokenizer, AutoModelForCausalLM
+from transformers import pipeline
+
+from io import BytesIO
+import base64
+import os
 
 class InferlessPythonModel:
     def initialize(self):
-        model_id = "CohereForAI/c4ai-command-r-v01"
-        self.tokenizer = AutoTokenizer.from_pretrained(model_id)
-        self.model = AutoModelForCausalLM.from_pretrained(model_id)
+        self.pipe = pipeline("image-segmentation", model="briaai/RMBG-1.4", trust_remote_code=True)
 
-    def infer(self,inputs):
-        prompt = inputs["prompt"]
-        messages = [{"role": "user", "content": prompt}]
-        input_ids = self.tokenizer.apply_chat_template(messages, tokenize=True, add_generation_prompt=True, return_tensors="pt")
-        generated_tokens = self.model.generate(input_ids,max_new_tokens=256,do_sample=True,temperature=0.1)
-        generated_text = self.tokenizer.batch_decode(generated_tokens[:, input_ids.shape[1]:], skip_special_tokens=True)[0]
-        return { "generated_text" : generated_text}
+    def infer(self, inputs):
+        image_url = inputs["image_url"]
+        pillow_mask = self.pipe(image_url, return_mask = True) # outputs a pillow mask
+        pillow_image = self.pipe(image_url) # applies mask on input and returns a pillow image
         
+        buff = BytesIO()
+        pillow_image.save(buff, format="PNG")
+        img_str = base64.b64encode(buff.getvalue()).decode()
+        return { "generated_image_base64" : img_str }
+
     def finalize(self):
         self.pipe = None
