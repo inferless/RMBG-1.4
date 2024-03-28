@@ -1,0 +1,7 @@
+build:
+  cuda_version: "12.1.1"
+  system_packages:
+    - "libssl-dev"
+  python_packages:
+    - "transformers==4.39.1"
+    - "accelerate==0.28.0"
